@@ -12,7 +12,9 @@
 
 <p>
   <strong>Image data:</strong>
-  <%= @post.image_data %>
+  <% if @post.image.present? %>
+      <%= image_tag @post.image_url %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
