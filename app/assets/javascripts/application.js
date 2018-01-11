@@ -12,4 +12,6 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery/dist/jquery.min.js
+//= require cropper/dist/cropper.min.js
 //= require_tree .

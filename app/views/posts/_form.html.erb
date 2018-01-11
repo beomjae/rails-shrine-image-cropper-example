@@ -22,17 +22,41 @@
   </div>
 
   <div class="field">
+    <img src="" id="image_cropper_hidden" height="500"/>
     <%= form.label :image %>
     <%= form.hidden_field :image, value: form.object.cached_image_data %>
     <%= form.file_field :image, id: :post_image_data %>
   </div>
 
-  <%= form.hidden_field :image_cropper_x, value: '10' %>
-  <%= form.hidden_field :image_cropper_y, value: '10' %>
-  <%= form.hidden_field :image_cropper_width, value: '100' %>
-  <%= form.hidden_field :image_cropper_height, value: '100' %>
+  <%= form.hidden_field :image_cropper_x, value: '', id: 'image_cropper_x' %>
+  <%= form.hidden_field :image_cropper_y, value: '' , id: 'image_cropper_y'%>
+  <%= form.hidden_field :image_cropper_width, value: '', id: 'image_cropper_width' %>
+  <%= form.hidden_field :image_cropper_height, value: '', id: 'image_cropper_height' %>
+  <div id="preview"></div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+<script>
+  $(function(){
+    $("#post_image_data").on("change", function(){
+      var file = $("#post_image_data").prop('files')[0];
+      var url = URL.createObjectURL(file);
+      $('#image_cropper_hidden').cropper({
+        aspectRatio: 1,
+        crop: function (e) {
+          console.log(e.x);
+          console.log(e.y);
+          console.log(e.width);
+          console.log(e.height);
+          $("#image_cropper_x").val(e.x);
+          $("#image_cropper_y").val(e.y);
+          $("#image_cropper_width").val(e.width);
+          $("#image_cropper_height").val(e.height);
+        }
+      });
+      $("#image_cropper_hidden").cropper('replace', url);
+    });
+  });
+</script>
