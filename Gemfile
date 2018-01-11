@@ -54,3 +54,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "shrine"
+gem "image_processing"
+gem "mini_magick", ">= 4.3.5"
